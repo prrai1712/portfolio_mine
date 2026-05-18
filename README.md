@@ -32,3 +32,19 @@ Frontend runs at `http://localhost:5173`. API proxies to `http://localhost:3001`
 client/          # React + Vite frontend
 server/          # Express + Prisma API
 ```
+
+## Deploy on Render (static site)
+
+1. Open [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint**.
+2. Connect GitHub and select **`prrai1712/portfolio_mine`** (uses `render.yaml` in the repo).
+3. Apply the blueprint — Render builds `client/` and publishes `client/dist`.
+
+**Manual static site** (same result):
+
+| Setting | Value |
+|--------|--------|
+| Build Command | `cd client && npm ci && npm run build` |
+| Publish Directory | `client/dist` |
+| Rewrite | `/*` → `/index.html` (Rewrite) |
+
+After deploy, set a custom domain in Render if you want (optional).

@@ -9,21 +9,19 @@ export function useAnimatedCounter(
 
   useEffect(() => {
     if (!enabled) return
-    let start = 0
     const startTime = performance.now()
+    let frameId = 0
 
     const tick = (now: number) => {
       const elapsed = now - startTime
       const progress = Math.min(elapsed / duration, 1)
       const eased = 1 - Math.pow(1 - progress, 3)
       setValue(Math.floor(eased * target))
-      if (progress < 1) requestAnimationFrame(tick)
+      if (progress < 1) frameId = requestAnimationFrame(tick)
     }
 
-    requestAnimationFrame(tick)
-    return () => {
-      start = 1
-    }
+    frameId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frameId)
   }, [target, duration, enabled])
 
   return value

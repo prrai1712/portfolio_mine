@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import type { FlowEdge, FlowNode, TechSystem } from '@/data/techArsenal'
+import type { FlowNode, TechSystem } from '@/data/techArsenal'
 
 const typeStyles: Record<FlowNode['type'], string> = {
   source: 'border-cyan-500/40 bg-cyan-500/10 text-cyan-300',
@@ -55,7 +55,7 @@ export function TechFlowDiagram({ tech, active }: TechFlowDiagramProps) {
         <div className="relative mt-4 pt-4 border-t border-slate-800/50">
           <p className="font-mono text-[8px] text-slate-600 mb-2">Connection map</p>
           <motion.div className="flex flex-wrap gap-2 justify-center">
-            {edges.map((e, i) => (
+            {edges.map((e) => (
               <span
                 key={`${e.from}-${e.to}`}
                 className="font-mono text-[9px] text-slate-500 border border-slate-800 rounded px-2 py-1"

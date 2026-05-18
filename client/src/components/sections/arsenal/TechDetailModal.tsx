@@ -202,7 +202,9 @@ function SectionLabel({
 }) {
   return (
     <div className="flex items-center gap-2">
-      <Icon className="h-4 w-4" style={{ color: accent }} />
+      <span style={{ color: accent }}>
+        <Icon className="h-4 w-4" />
+      </span>
       <h3 className="font-mono text-xs uppercase tracking-widest text-slate-400">{label}</h3>
     </div>
   )

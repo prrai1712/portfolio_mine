@@ -86,7 +86,7 @@ export function TechArsenal() {
         {arsenalSystems.length} production systems documented · ESC to close detail view
       </motion.p>
 
-      <TechDetailModal tech={selectedTech} onClose={() => setSelectedId(null)} />
+      <TechDetailModal tech={selectedTech ?? null} onClose={() => setSelectedId(null)} />
     </section>
   )
 }
