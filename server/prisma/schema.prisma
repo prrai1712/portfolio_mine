@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TelemetrySnapshot {
+  id             String   @id @default(cuid())
+  projects       Int
+  rowsValidated  BigInt
+  uptime         Float
+  kafkaPipelines Int
+  apiThroughput  String
+  activeWorkers  Int
+  createdAt      DateTime @default(now())
+}
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  event     String
+  level     String   @default("info")
+  createdAt DateTime @default(now())
+}
