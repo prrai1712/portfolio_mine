@@ -1,11 +1,45 @@
 {
   "name": "priyanshuos",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "npm run dev --prefix client",
-    "dev:client": "npm run dev --prefix client",
-    "dev:server": "npm run dev --prefix server",
-    "build": "npm run build --prefix client",
-    "build:server": "npm run build --prefix server"
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.39.0",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.16.0",
+    "next": "^15.5.4",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.184.1",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^15.5.4",
+    "prisma": "^6.19.0",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

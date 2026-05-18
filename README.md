@@ -1,50 +1,62 @@
 # PriyanshuOS
 
-Cinematic engineering operating system — a live systems intelligence platform built as an immersive command center UI.
+Cinematic engineering operating system — Next.js fullstack portfolio optimized for **Vercel**.
 
 ## Stack
 
-**Frontend:** React, TypeScript, Vite, TailwindCSS, Framer Motion, GSAP, React Three Fiber, Three.js
+- **Frontend:** Next.js 15 (App Router), React 19, Tailwind CSS v4, Framer Motion, GSAP, React Three Fiber
+- **Backend:** Next.js Route Handlers (no Express)
+- **Database:** Prisma + Neon PostgreSQL (optional — site works with static fallbacks)
 
-**Backend:** Node.js, Express, PostgreSQL, Prisma
-
-## Quick Start
+## Quick start
 
 ```bash
-# Frontend
-cd client
 npm install
-npm run dev
-
-# Backend (optional — serves telemetry API)
-cd server
-npm install
-cp .env.example .env
-npx prisma migrate dev
+cp .env.example .env   # add Neon DATABASE_URL when ready
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173`. API proxies to `http://localhost:3001`.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Structure
+## Deploy on Vercel (recommended)
+
+1. Push this repo to GitHub.
+2. [vercel.com/new](https://vercel.com/new) → Import **`portfolio_mine`**.
+3. Framework: **Next.js** (auto-detected).
+4. Environment variables:
+   - `DATABASE_URL` — Neon connection string ([neon.tech](https://neon.tech))
+   - `GITHUB_TOKEN` — optional, for higher GitHub API limits
+5. Deploy.
+
+```bash
+npx prisma db push   # after DATABASE_URL is set (optional)
+```
+
+## API routes
+
+| Route | Description |
+|-------|-------------|
+| `GET /api/health` | Edge health check |
+| `GET /api/metrics` | Telemetry (Prisma or resume defaults) |
+| `GET /api/activity` | Activity log |
+| `GET /api/github` | Cached GitHub profile + repos |
+
+## Project structure
 
 ```
-client/          # React + Vite frontend
-server/          # Express + Prisma API
+app/              # App Router, API routes, globals.css
+src/components/   # UI (client components)
+src/data/         # Resume & arsenal content
+src/lib/          # Prisma, GitHub, telemetry helpers
+prisma/           # Schema
+public/           # Static assets + resume PDF
 ```
 
-## Deploy on Render
+## Scripts
 
-Uses a **Node web service** that builds the Vite app and serves `client/dist` with `serve` (reliable SPA + assets).
-
-1. [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → repo **`portfolio_mine`**.
-2. Or edit existing **priyanshuos** service:
-   - **Runtime:** Node
-   - **Build Command:** `./scripts/render-build.sh`
-   - **Start Command:** `cd client && npm start`
-   - **Publish Directory:** leave empty (not a static site)
-3. **Manual Deploy** → check **Clear build cache**, then deploy.
-
-Live URL: [https://priyanshuos.onrender.com](https://priyanshuos.onrender.com)
-
-**If you see “Not Found”:** the publish path was likely wrong (`dist` instead of `client/dist`) or the service was still a static site with a bad deploy. Switch to Node + commands above and redeploy.
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Local development |
+| `npm run build` | Production build |
+| `npm run start` | Production server |
+| `npm run db:push` | Push Prisma schema to Neon |
