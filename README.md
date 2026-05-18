@@ -33,18 +33,18 @@ client/          # React + Vite frontend
 server/          # Express + Prisma API
 ```
 
-## Deploy on Render (static site)
+## Deploy on Render
 
-1. Open [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint**.
-2. Connect GitHub and select **`prrai1712/portfolio_mine`** (uses `render.yaml` in the repo).
-3. Apply the blueprint — Render builds `client/` and publishes `client/dist`.
+Uses a **Node web service** that builds the Vite app and serves `client/dist` with `serve` (reliable SPA + assets).
 
-**Manual static site** (same result):
+1. [Render Dashboard](https://dashboard.render.com/) → **New** → **Blueprint** → repo **`portfolio_mine`**.
+2. Or edit existing **priyanshuos** service:
+   - **Runtime:** Node
+   - **Build Command:** `./scripts/render-build.sh`
+   - **Start Command:** `cd client && npm start`
+   - **Publish Directory:** leave empty (not a static site)
+3. **Manual Deploy** → check **Clear build cache**, then deploy.
 
-| Setting | Value |
-|--------|--------|
-| Build Command | `cd client && npm ci && npm run build` |
-| Publish Directory | `client/dist` |
-| Rewrite | `/*` → `/index.html` (Rewrite) |
+Live URL: [https://priyanshuos.onrender.com](https://priyanshuos.onrender.com)
 
-After deploy, set a custom domain in Render if you want (optional).
+**If you see “Not Found”:** the publish path was likely wrong (`dist` instead of `client/dist`) or the service was still a static site with a bad deploy. Switch to Node + commands above and redeploy.
